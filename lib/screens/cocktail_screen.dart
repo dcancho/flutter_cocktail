@@ -19,7 +19,9 @@ class _CocktailScreenState extends State<CocktailScreen> {
         ),
         body: Padding(
           padding: const EdgeInsets.all(32.0),
-          child: Column(children: [
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
             Hero(
               tag: 'cocktail-image-${widget.cocktail.idDrink}',
               child: Image.network(
