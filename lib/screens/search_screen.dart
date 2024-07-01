@@ -11,14 +11,8 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  final List<Cocktail> _cocktails = [
-    Cocktail(
-      idDrink: 5000,
-    strDrink: 'Whiskey Sour', 
-    strCategory: 'Cocktail', 
-    strDrinkThumb: 'https://www.thecocktaildb.com/images/media/drink/hbkfsh1589574990.jpg',
-    strInstructions: "Shake ingredients in a cocktail shaker with ice. Strain into glass. Garnish and serve.",),
-  ];
+  final TextEditingController _searchController = TextEditingController();
+  final List<Cocktail> _cocktails = [];
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +25,18 @@ class _SearchScreenState extends State<SearchScreen> {
         child: Column(
           children: [
             TextFormField(
+              controller: _searchController,
+              onChanged: (query) {
+                setState(() {});
+              
+              },
               decoration: const InputDecoration(
                 hintText: 'Search',
               ),
             ),
             Expanded(
               child: FutureBuilder(
-                future: CocktailService().getCocktails('colada'), 
+                future: CocktailService().getCocktails(_searchController.text), 
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
