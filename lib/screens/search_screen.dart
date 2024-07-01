@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cocktail/models/cocktail.dart';
+import 'package:flutter_cocktail/screens/cocktail_screen.dart';
 import 'package:flutter_cocktail/services/cocktail_service.dart';
 import 'package:flutter_cocktail/widgets/cocktail_tile.dart';
 
@@ -28,12 +29,12 @@ class _SearchScreenState extends State<SearchScreen> {
               controller: _searchController,
               onChanged: (query) {
                 setState(() {});
-              
               },
               decoration: const InputDecoration(
                 hintText: 'Search',
               ),
             ),
+            const SizedBox(height: 16,),
             Expanded(
               child: FutureBuilder(
                 future: CocktailService().getCocktails(_searchController.text), 
@@ -53,10 +54,21 @@ class _SearchScreenState extends State<SearchScreen> {
                         crossAxisCount: 2,
                         crossAxisSpacing: 8,
                         mainAxisSpacing: 8,
+                        childAspectRatio: 0.70
                       ),
                       itemCount: cocktails.length,
                       itemBuilder: (context, index) {
-                        return CocktailTile(cocktail: cocktails[index]);
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CocktailScreen(cocktail: cocktails[index])
+                              )
+                            );
+                          },
+                          child: CocktailTile(cocktail: cocktails[index])
+                          );
                       },
                     );
                   }

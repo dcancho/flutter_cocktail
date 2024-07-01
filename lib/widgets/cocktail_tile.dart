@@ -12,24 +12,26 @@ class CocktailTile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.network(
-            cocktail.strDrinkThumb,
-            height: 160,
-          ),
+          Hero(
+              tag: 'cocktail-image-${cocktail.idDrink}',
+              child: Image.network(
+                cocktail.strDrinkThumb,
+                fit: BoxFit.cover,
+              )),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-              Text(
-                cocktail.strDrink,
-                style: Theme.of(context).textTheme.headlineSmall 
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(cocktail.strDrink,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,),
+              const SizedBox(
+                height: 4,
               ),
-              const SizedBox(height: 4,),
-              Text(
-                cocktail.strCategory,
-                style: Theme.of(context).textTheme.labelLarge
-              ),
+              Text(cocktail.strCategory,
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant)),
             ]),
           )
         ],
