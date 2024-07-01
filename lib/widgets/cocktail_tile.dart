@@ -11,6 +11,7 @@ class CocktailTile extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Hero(
               tag: 'cocktail-image-${cocktail.idDrink}',
@@ -22,10 +23,12 @@ class CocktailTile extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(cocktail.strDrink,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,),
+              Text(
+                cocktail.strDrink,
+                style: Theme.of(context).textTheme.headlineSmall,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
               const SizedBox(
                 height: 4,
               ),
