@@ -1,9 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cocktail/models/cocktail.dart';
+import 'package:flutter_cocktail/persistence/favourite_dao.dart';
 
-class CocktailTile extends StatelessWidget {
+class CocktailTile extends StatefulWidget {
   const CocktailTile({super.key, required this.cocktail});
   final Cocktail cocktail;
+
+  @override
+  State<CocktailTile> createState() => _CocktailTileState();
+}
+
+class _CocktailTileState extends State<CocktailTile> {
+  late bool _isFavourite = false;
+
+  onTap() async {
+    if (_isFavourite) {
+      await FavouriteDao().removeFavourite(widget.cocktail.idDrink);
+    } else {
+      await FavouriteDao().addFavourite(widget.cocktail);
+    }
+
+    setState(() {
+      _isFavourite = !_isFavourite;
+    });
+  }
+
+  isFavourite() async {
+    _isFavourite = await FavouriteDao().isFavourite(widget.cocktail.idDrink);
+    setState(() {
+      _isFavourite = _isFavourite;
+    });
+  }
+
+  @override
+  initState() {
+    super.initState();
+    isFavourite();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,17 +47,31 @@ class CocktailTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Hero(
-              tag: 'cocktail-image-${cocktail.idDrink}',
-              child: Image.network(
-                cocktail.strDrinkThumb,
-                fit: BoxFit.cover,
+              tag: 'cocktail-image-${widget.cocktail.idDrink}',
+              child: Stack(
+                alignment: AlignmentDirectional.bottomEnd,
+                children: [
+                  Image.network(
+                    widget.cocktail.strDrinkThumb,
+                    fit: BoxFit.cover,
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      _isFavourite ? Icons.favorite : Icons.favorite_border,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      onTap();
+                    },
+                  )
+                ],
               )),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Text(
-                cocktail.strDrink,
+                widget.cocktail.strDrink,
                 style: Theme.of(context).textTheme.headlineSmall,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -32,7 +79,7 @@ class CocktailTile extends StatelessWidget {
               const SizedBox(
                 height: 4,
               ),
-              Text(cocktail.strCategory,
+              Text(widget.cocktail.strCategory,
                   style: Theme.of(context).textTheme.labelLarge?.copyWith(
                       color: Theme.of(context).colorScheme.onSurfaceVariant)),
             ]),

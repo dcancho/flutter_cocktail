@@ -32,19 +32,22 @@ class _CocktailScreenState extends State<CocktailScreen> {
                 fit: BoxFit.cover,
               ),
             ),
-            const SizedBox(height: 16,),
+            const SizedBox(
+              height: 16,
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(widget.cocktail.strCategory),
-                Text(widget.cocktail.strDrink, style: Theme.of(context).textTheme.headlineLarge),
+                Text(widget.cocktail.strDrink,
+                    style: Theme.of(context).textTheme.headlineLarge),
                 const SizedBox(height: 16),
-                Text(widget.cocktail.strInstructions,),
+                Text(
+                  widget.cocktail.strInstructions,
+                ),
               ],
             )
-          ]
-          ),
-        )
-        );
+          ]),
+        ));
   }
 }
