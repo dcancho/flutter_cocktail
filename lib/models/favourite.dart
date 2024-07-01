@@ -3,15 +3,13 @@ import 'package:flutter_cocktail/models/cocktail.dart';
 class Favourite {
   final int id;
   final String name;
-  final String image;
 
-  Favourite({required this.id, required this.name, required this.image});
+  Favourite({required this.id, required this.name});
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'name': name,
-      'image': image,
     };
   }
 
@@ -19,7 +17,6 @@ class Favourite {
     return {
       'id': cocktail.idDrink,
       'name': cocktail.strDrink,
-      'image': cocktail.strDrinkThumb,
     };
   }
 }

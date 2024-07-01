@@ -15,8 +15,7 @@ class AppDatabase {
         String query = """
           CREATE TABLE $tableName (
             id INTEGER PRIMARY KEY,
-            name TEXT,
-            image TEXT
+            name TEXT
           )
         """;
         db.execute(query);

@@ -27,8 +27,7 @@ class FavouriteDao {
     Database db = await AppDatabase().openDB();
     final newFavourite = Favourite(
       id: cocktail.idDrink, 
-      name: cocktail.strDrink, 
-      image: cocktail.strDrinkThumb
+      name: cocktail.strDrink,
     );
 
     await db.insert(
@@ -54,7 +53,6 @@ class FavouriteDao {
       return Favourite(
         id: result[index]['id'],
         name: result[index]['name'],
-        image: result[index]['image'],
       );
     });
   }

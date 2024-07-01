@@ -62,6 +62,11 @@ class _CocktailTileState extends State<CocktailTile> {
                     ),
                     onPressed: () {
                       onTap();
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(_isFavourite
+                            ? 'Removed ${widget.cocktail.strDrink} from favourites'
+                            : 'Added ${widget.cocktail.strDrink} to favourites'),
+                      ));
                     },
                   )
                 ],

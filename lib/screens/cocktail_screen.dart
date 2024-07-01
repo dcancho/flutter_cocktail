@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cocktail/models/cocktail.dart';
+import 'package:flutter_cocktail/persistence/favourite_dao.dart';
 
 class CocktailScreen extends StatefulWidget {
   const CocktailScreen({super.key, required this.cocktail});
@@ -15,12 +16,6 @@ class _CocktailScreenState extends State<CocktailScreen> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Details'),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.favorite_border),
-              onPressed: () {},
-            )
-          ],
         ),
         body: Padding(
           padding: const EdgeInsets.all(32.0),
